@@ -1,0 +1,21 @@
+services:
+  app:
+    image: ${APP_NAME}:latest
+    container_name: ${APP_NAME}
+    build:
+      dockerfile: ./docker/Dockerfile
+      context: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    labels:
+      traefik.enable: true
+      traefik.http.routers.${APP_NAME}.rule: Host(`${APP_DOMAIN}`)
+      traefik.http.routers.${APP_NAME}.entrypoints: websecure
+      traefik.http.routers.${APP_NAME}.tls: true
+      traefik.http.routers.${APP_NAME}.tls.certresolver: myresolver
+      traefik.http.services.${APP_NAME}.loadbalancer.server.port: ${APP_PORT}

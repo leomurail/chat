@@ -38,6 +38,6 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
-server.listen(3002, () => {
-    console.log('server running at http://localhost:3002');
+server.listen(3000, () => {
+    console.log('server running at http://localhost:3000');
 });
