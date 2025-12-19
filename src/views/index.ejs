@@ -67,7 +67,7 @@
                 const messageDiv = document.createElement('div');
                 messageDiv.className = `message ${isMe ? 'sent' : 'received'}`;
 
-                messageDiv.innerHTML = `
+                messageDiv.innerText = `
                 <span class="message-info">${isMe ? 'You' : 'Stranger'} • ${timeStr}</span>
                 ${data.text}
             `;

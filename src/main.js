@@ -19,7 +19,7 @@ function filterMsg(msg) {
         }
     }
 
-    msg.text += '<br> ps je suis trop bo gosse';
+    msg.text += '\n ps je suis trop bo gosse';
 
     return msg;
 }
