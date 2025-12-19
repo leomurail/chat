@@ -5,13 +5,15 @@ services:
     build:
       dockerfile: ./docker/Dockerfile
       context: .
-    ports:
-      - "3000:3000"
+    networks:
+      - traefik-net
+    # ports:
+    #   - "3000:3000"
     volumes:
       - .:/app
       - /app/node_modules
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=${NODE_ENV}
     labels:
       traefik.enable: true
       traefik.http.routers.${APP_NAME}.rule: Host(`${APP_DOMAIN}`)
@@ -19,3 +21,7 @@ services:
       traefik.http.routers.${APP_NAME}.tls: true
       traefik.http.routers.${APP_NAME}.tls.certresolver: myresolver
       traefik.http.services.${APP_NAME}.loadbalancer.server.port: ${APP_PORT}
+
+networks:
+  traefik-net:
+    external: true

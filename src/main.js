@@ -4,6 +4,7 @@ import { Server } from 'socket.io';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { BANNED_WORDS } from './constant.js';
+import { getConfig } from './utils/getConfig.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -38,6 +39,8 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
-server.listen(3000, () => {
-    console.log('server running at http://localhost:3000');
+const port = getConfig('APP_PORT') || 3000;
+
+server.listen(port, () => {
+    console.log(`server running at http://localhost:${port}`);
 });
